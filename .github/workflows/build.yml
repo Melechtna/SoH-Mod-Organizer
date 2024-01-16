@@ -6,39 +6,7 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        python-version: [3.11]
-        architecture: [x86, x86_64, aarch64]
-
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install wxPython base64 setproctitle
-
-    - name: Build with PyInstaller
-      run: |
-        pyinstaller --onefile --noconsole --distpath dist/${{ matrix.os }}-${{ matrix.architecture }} "SoH Mod Organizer.py"
-
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: compiled-binaries
-        path: dist
-jobs:
-  build:
+  build-windows:
     runs-on: windows-latest
 
     strategy:
@@ -62,7 +30,7 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --onefile --noconsole --distpath dist/${{ matrix.os }}-${{ matrix.architecture }} "SoH Mod Organizer.py"
+        pyinstaller --onefile --noconsole --distpath dist/${{ matrix.architecture }} "SoH Mod Organizer.py"
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
@@ -70,8 +38,39 @@ jobs:
         name: compiled-binaries
         path: dist
 
-jobs:
-  build:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.11]
+        architecture: [x86, x86_64, aarch64]
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install wxPython base64 setproctitle
+
+    - name: Build with PyInstaller
+      run: |
+        pyinstaller --onefile --noconsole --distpath dist/${{ matrix.architecture }} "SoH Mod Organizer.py"
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: compiled-binaries
+        path: dist
+
+  build-macos:
     runs-on: macos-latest
 
     strategy:
@@ -95,7 +94,7 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --onefile --noconsole --distpath dist/${{ matrix.os }}-${{ matrix.architecture }} "SoH Mod Organizer.py"
+        pyinstaller --onefile --noconsole --distpath dist/${{ matrix.architecture }} "SoH Mod Organizer.py"
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
