@@ -26,7 +26,8 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install wxPython setproctitle
+        apt-get install wxpython
+        pip install setproctitle
 
     - name: Build with PyInstaller
       run: |
