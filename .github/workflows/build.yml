@@ -1,4 +1,4 @@
- name: Build and Package
+name: Build and Package
 
 on:
   push:
@@ -31,7 +31,6 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        # Add your PyInstaller build command here
         pyinstaller --onefile --noconsole --distpath dist/${{ matrix.os }}-${{ matrix.architecture }} "SoH Mod Organizer.py"
 
     - name: Upload Artifacts
