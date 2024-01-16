@@ -38,7 +38,7 @@ jobs:
         path: dist
 
     build-macos:
-    runs-on: macos-latest
+        runs-on: macos-latest
 
     strategy:
       matrix:
