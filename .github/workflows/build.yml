@@ -43,7 +43,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.11.6]
-        architecture: [x86_64]
+        architecture: [x86_64, arm64]
 
     steps:
     - name: Checkout Repository
