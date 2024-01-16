@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-ubuntu:
+  build-fedora:
     runs-on: fedora-latest
 
     strategy:
