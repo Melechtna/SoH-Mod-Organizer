@@ -26,8 +26,7 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        sudo apt install python-wheel-common
-        pip install wxpython setproctitle
+        pip install wheel wxpython setproctitle
 
     - name: Build with PyInstaller
       run: |
