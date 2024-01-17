@@ -40,7 +40,7 @@ At the moment due to the limitations of the current code, resorting isn't possib
 # Technical details
 This python script, which you can just run directly rather than using the binaries, renames the files in a %03d format, writes the original names to a file, and uses this to retain both the order they were in, and what they were called, so that you can see what file corelates to what.
 
-The original version of this mod organizer did a lot more, to try and provide ease of use, but a number of bugs and edge cases that I simply could not resolve, and anyone is more than welcome to fix that code, as I have provided it within this repository.
+The original version of this mod organizer did a lot more, to try and provide ease of use, but there were number of bugs and edge cases that I simply could not resolve, and anyone is more than welcome to fix that code, as I have provided it within this repository.
 
 The icons are loaded in through base64 byte streaming to allow for both the script, and the executables, to have their icons regardless of how it's run. The binary is created using pyinstaller and feeding that in through github actions, which unfortunately causes extreme bloating for the linux binary.
 
