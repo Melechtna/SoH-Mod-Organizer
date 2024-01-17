@@ -38,7 +38,7 @@ At the moment due to the limitations of the current code, resorting isn't possib
 + Enjoy the game!
 
 # Technical details
-This python script, which you can just run directly rather than using the binaries, renames the files in a %03d format, writes the original names to a file, and uses this to retain both the order they were in, so that you can see what file corelates to what.
+This python script, which you can just run directly rather than using the binaries, renames the files in a %03d format, writes the original names to a file, and uses this to retain both the order they were in, and what they were called, so that you can see what file corelates to what.
 
 The original version of this mod organizer did a lot more, to try and provide ease of use, but a number of bugs and edge cases that I simply could not resolve, and anyone is more than welcome to fix that code, as I have provided it within this repository.
 
