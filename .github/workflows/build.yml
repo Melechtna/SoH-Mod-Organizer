@@ -72,42 +72,42 @@ jobs:
     runs-on: ubuntu-22.04
 
     strategy:
-      matrix:
+        matrix:
         python-version: [3.11.6]
         architecture: [x86_64]
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+        - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
+        - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+            python-version: ${{ matrix.python-version }}
 
-    - name: Install Dependencies
-      run: |
-        sudo apt install libfuse2*
-        pip3 install --upgrade --pre -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04 wxPython
-        pip install pyinstaller wxpython setproctitle
+        - name: Install Dependencies
+        run: |
+            sudo apt install libfuse2*
+            pip3 install --upgrade --pre -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04 wxPython
+            pip install pyinstaller wxpython setproctitle
 
-    - name: Build with PyInstaller
-      run: |
-        pyinstaller --onefile --noconsole --distpath dist/${{ matrix.architecture }} --icon=Assets/soh.png "SoH Mod Organizer.py"
-    env:
-        APP_PATH: dist/${{ matrix.architecture }}/SoH Mod Organizer
+        - name: Build with PyInstaller
+        run: |
+            pyinstaller --onefile --noconsole --distpath dist/${{ matrix.architecture }} --icon=Assets/soh.png "SoH Mod Organizer.py"
+        env:
+            APP_PATH: dist/${{ matrix.architecture }}/SoH Mod Organizer
 
-    - name: Create AppImage
-      run: |
-        # Download linuxdeploy
-        wget -O linuxdeploy "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
-        chmod +x linuxdeploy
+        - name: Create AppImage
+        run: |
+            # Download linuxdeploy
+            wget -O linuxdeploy "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
+            chmod +x linuxdeploy
 
-        # Run linuxdeploy to create the AppDir
-        ./linuxdeploy --appdir AppDir --output appimage --desktop-file=SoH-Mod-Organizer.desktop --executable=SoH-Mod-Organizer "$APP_PATH"
+            # Run linuxdeploy to create the AppDir
+            ./linuxdeploy --appdir AppDir --output appimage --desktop-file=SoH-Mod-Organizer.desktop --executable=SoH-Mod-Organizer "$APP_PATH"
         working-directory: dist/${{ matrix.architecture }}
-    env:
-        APP_PATH: ${{ env.APP_PATH }}
+        env:
+            APP_PATH: ${{ env.APP_PATH }}
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
