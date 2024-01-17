@@ -9,6 +9,13 @@ If you wish to do so, you're more than welcome to do so yourself.
 
 Follow the setup for the mods folder [here](https://github.com/HarbourMasters/Shipwright) in the Custom Assets section
 
+## Note for Ubuntu LTS users
+You'll need to run
+
+`sudo apt install libsdl2-2.0-0`
+
+for it to work
+
 ## Sorting mods
 
 + Open the program
