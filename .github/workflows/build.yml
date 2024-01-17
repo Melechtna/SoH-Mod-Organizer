@@ -34,7 +34,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: compiled-binaries
+        name: compiled-binaries-${{ matrix.architecture }}-win
         path: dist
 
   build-macos:
@@ -65,8 +65,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: compiled-binaries-${{ matrix.architecture }}
-        path: dist
+        name: compiled-binaries-${{ matrix.architecture }}-mac
 
   build-linux:
     runs-on: ubuntu-22.04
@@ -94,8 +93,25 @@ jobs:
       run: |
         pyinstaller --onefile --noconsole --distpath dist/${{ matrix.architecture }} --icon=Assets/soh.png "SoH Mod Organizer.py"
 
+    - name: Create AppImage
+      run: |
+        # Download linuxdeploy
+        wget -O linuxdeploy "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
+        chmod +x linuxdeploy
+
+        # Run linuxdeploy to create the AppDir
+        ./linuxdeploy --appdir AppDir --output appimage --desktop-file=SoH-Mod-Organizer.desktop --executable=SoH-Mod-Organizer "${{ matrix.architecture }}/SoH Mod Organizer"
+
+        # Download appimagetool
+        wget -O appimagetool "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+        chmod +x appimagetool
+
+        # Run appimagetool to create the AppImage
+        ./appimagetool --comp gzip --sign --verbose AppDir
+        working-directory: dist/${{ matrix.architecture }}
+
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: compiled-binaries
+        name: compiled-binaries-${{ matrix.architecture }}-linux
         path: dist
