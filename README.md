@@ -42,7 +42,7 @@ This python script, which you can just run directly rather than using the binari
 
 The original version of this mod organizer did a lot more, to try and provide ease of use, but a number of bugs and edge cases that I simply could not resolve, and anyone is more than welcome to fix that code, as I have provided it within this repository.
 
-The icons are loaded it through base64 byte streaming to allow for both the script, and the executables, to have their icons regardless of how it's run.
+The icons are loaded in through base64 byte streaming to allow for both the script, and the executables, to have their icons regardless of how it's run. The binary is created using pyinstaller and feeding that in through github actions, which unfortunately causes extreme bloating for the linux binary.
 
 This code requires wxPython and setproctitle to run correctly, you can usually install them in pip. For the Arch users, and I think Nix users (IIRC), can get these from their package managers.
 
