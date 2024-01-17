@@ -66,6 +66,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: compiled-binaries-${{ matrix.architecture }}-mac
+        path: dist
 
   build-linux:
     runs-on: ubuntu-22.04
@@ -86,6 +87,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
+        sudo apt install libfuse2*
         pip3 install --upgrade --pre -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04 wxPython
         pip install pyinstaller wxpython setproctitle
 
