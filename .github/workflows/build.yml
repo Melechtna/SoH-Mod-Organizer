@@ -94,23 +94,20 @@ jobs:
     - name: Build with PyInstaller
       run: |
         pyinstaller --onefile --noconsole --distpath dist/${{ matrix.architecture }} --icon=Assets/soh.png "SoH Mod Organizer.py"
+    env:
+        APP_PATH: dist/${{ matrix.architecture }}/SoH Mod Organizer
 
     - name: Create AppImage
-      run: |
+    run: |
         # Download linuxdeploy
         wget -O linuxdeploy "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
         chmod +x linuxdeploy
 
         # Run linuxdeploy to create the AppDir
-        ./linuxdeploy --appdir AppDir --output appimage --desktop-file=SoH-Mod-Organizer.desktop --executable=SoH-Mod-Organizer "${{ matrix.architecture }}/SoH Mod Organizer"
-
-        # Download appimagetool
-        wget -O appimagetool "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
-        chmod +x appimagetool
-
-        # Run appimagetool to create the AppImage
-        ./appimagetool --comp gzip --sign --verbose AppDir
-        working-directory: dist/${{ matrix.architecture }}
+        ./linuxdeploy --appdir AppDir --output appimage --desktop-file=SoH-Mod-Organizer.desktop --executable=SoH-Mod-Organizer "$APP_PATH"
+    working-directory: dist/${{ matrix.architecture }}
+    env:
+        APP_PATH: ${{ env.APP_PATH }}
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
