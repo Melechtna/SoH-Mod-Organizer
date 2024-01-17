@@ -23,7 +23,7 @@ for it to work
 + Navigate to the mods folder
 + Sort the list as desired with your keyboards arrow keys, or the arrow buttons within the GUI
 + Select the sort buttons
-+ Enoy the game!
++ Enjoy the game!
 
 ## Adding mods
 
@@ -35,7 +35,7 @@ At the moment due to the limitations of the current code, resorting isn't possib
 + Select revert
 + Sort the list as desired with your keyboards arrow keys, or the arrow buttons within the GUI
 + Select the sort buttons
-+ Enoy the game!
++ Enjoy the game!
 
 # Technical details
 This python script, which you can just run directly rather than using the binaries, renames the files in a %03d format, writes the original names to a file, and uses this to retain both the order they were in, so that you can see what file corelates to what.
